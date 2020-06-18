@@ -29,6 +29,12 @@
 
 		<mapping
 			class="ar.com.educacionit.app.domain.Producto" />
+			
+			<mapping
+			class="ar.com.educacionit.app.domain.Role" />
+			
+			<mapping
+			class="ar.com.educacionit.app.domain.User" />
 
 	</session-factory>
 

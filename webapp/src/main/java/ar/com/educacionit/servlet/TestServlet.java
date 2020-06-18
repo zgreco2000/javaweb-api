@@ -24,7 +24,7 @@ public class TestServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		
 		try {
-			Producto p = ps.getProductobyCodigo("0001");
+			Producto p = ps.getProducto("0001");
 			req.getSession().setAttribute("producto", p);
 			getServletContext().getRequestDispatcher("/test.jsp").forward(req, resp);
 		} catch (ServiceException e) {
