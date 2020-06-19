@@ -55,13 +55,14 @@
 		</dependency>
 
 		<dependency>
-			<groupId>ar.com.eduacionit</groupId>
-			<artifactId>app-domain</artifactId>
+			<groupId>ar.com.educacionit</groupId>
+			<artifactId>domain</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
+		
 		<dependency>
-			<groupId>ar.com.eduacionit</groupId>
-			<artifactId>app-services</artifactId>
+			<groupId>ar.com.educacionit</groupId>
+			<artifactId>services</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<!-- Compile/runtime dependencies -->
@@ -84,8 +85,18 @@
             <artifactId>bootstrap</artifactId>
             <version>4.3.1</version>
         </dependency>
-        
-	</dependencies>
+
+        <dependency>
+        	<groupId>ar.com.educacionit</groupId>
+        	<artifactId>domain</artifactId>
+        	<version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+        	<groupId>ar.com.educacionit</groupId>
+        	<artifactId>services</artifactId>
+        	<version>1.0.0-SNAPSHOT</version>
+        </dependency>
+</dependencies>
 	<build>
 		<finalName>jsf.webapp</finalName>
 		<plugins>
