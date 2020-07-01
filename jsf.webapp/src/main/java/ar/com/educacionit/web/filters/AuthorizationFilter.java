@@ -52,6 +52,7 @@ public class AuthorizationFilter implements Filter {
 		
 		final List<String> excludedPath = Arrays.asList(
 				contextPath+ "/index.xhtml",
+				contextPath+ "/test.xhtml",
 				contextPath+"/login.xhtml", 
 				contextPath+"/notLogged.xhtml", 
 				req.getContextPath() + "/" 

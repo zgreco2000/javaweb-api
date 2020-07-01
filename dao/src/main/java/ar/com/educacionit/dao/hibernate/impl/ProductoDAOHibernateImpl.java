@@ -10,6 +10,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.query.Query;
 
 import ar.com.educacionit.app.domain.Producto;
+import ar.com.educacionit.app.domain.TipoProducto;
 import ar.com.educacionit.dao.ProductoDao;
 import ar.com.educacionit.dao.exceptions.DuplicateException;
 import ar.com.educacionit.dao.exceptions.GenericException;
@@ -156,6 +157,7 @@ public class ProductoDAOHibernateImpl implements ProductoDao {
 					productoBean = productoOptional.get();
 					productoBean.setDescripcion(producto.getDescripcion());
 					productoBean.setPrecio(producto.getPrecio());
+					productoBean.setTipoProducto(producto.getTipoProducto());
 				}
 
 				session.saveOrUpdate(productoBean);
@@ -206,5 +208,73 @@ public class ProductoDAOHibernateImpl implements ProductoDao {
 			session.close();
 		}
 		return producto;
+	}
+
+	@Override
+	public List<TipoProducto> findTipoProductos() throws GenericException {
+		Session session = factory.getCurrentSession();
+
+		List<TipoProducto> tipoProductos = new ArrayList<TipoProducto>();
+		
+		try {
+
+			// All the action with DB via Hibernate
+			// must be located in one transaction.
+			// Start Transaction.
+			session.getTransaction().begin();
+
+			// Create an HQL statement, query the object.
+			String sql = "Select e from " + TipoProducto.class.getName() + " e ";
+
+			// Create Query object.
+			Query<TipoProducto> query = session.createQuery(sql);
+
+			// Execute query.
+			tipoProductos = query.getResultList();
+
+			// Commit data.
+			session.getTransaction().commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			// Rollback in case of an error occurred.
+			session.getTransaction().rollback();
+		}
+		return tipoProductos;
+	}
+	
+	
+	public List<Producto> findByDescripcion(String descripcion) throws GenericException {
+		Session session = factory.getCurrentSession();
+
+		List<Producto> productos = new ArrayList<>();
+		
+		try {
+
+			// All the action with DB via Hibernate
+			// must be located in one transaction.
+			// Start Transaction.
+			session.getTransaction().begin();
+
+			// Create an HQL statement, query the object.
+			String sql = "Select e from " + Producto.class.getName() + " e where UPPER(e.descripcion) like :descripcion";
+
+			// Create Query object.
+			Query<Producto> query = session.createQuery(sql);
+
+			query.setParameter("descripcion", "%"+descripcion.toUpperCase()+"%");
+			
+			// Execute query.
+			productos = query.getResultList();
+
+			// Commit data.
+			session.getTransaction().commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			// Rollback in case of an error occurred.
+			session.getTransaction().rollback();
+		}
+		return productos;
 	}
 }

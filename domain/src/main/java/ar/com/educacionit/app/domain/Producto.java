@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -25,6 +27,11 @@ public class Producto {
 	@Column(name = "codigo", nullable = false, unique = true, length = 10)
 	private String codigo;
 	
+	@ManyToOne
+	@JoinColumn(name = "tipo_producto_id", referencedColumnName = "id", nullable = false)
+	private TipoProducto tipoProducto;
+	
+	
 	public Producto(Long id, String descripcion, Float precio, String codigo) {
 		this.id = id;
 		this.descripcion = descripcion;
@@ -37,8 +44,18 @@ public class Producto {
 		this.precio = precio;
 		this.codigo = codigo;
 	}
+	
+	
 
 	
+	public Producto(Long id, String descripcion, Float precio, String codigo, TipoProducto tipoProducto) {
+		this.id = id;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.codigo = codigo;
+		this.tipoProducto = tipoProducto;
+	}
+
 	public Producto() {
 		
 	}
@@ -75,10 +92,20 @@ public class Producto {
 		this.codigo = codigo;
 	}
 
+	public TipoProducto getTipoProducto() {
+		return tipoProducto;
+	}
+
+	public void setTipoProducto(TipoProducto tipoProducto) {
+		this.tipoProducto = tipoProducto;
+	}
+
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", descripcion=" + descripcion + ", precio=" + precio + ", codigo=" + codigo
-				+ "]";
+				+ ", tipoProducto=" + tipoProducto + "]";
 	}
+
+
 	
 }

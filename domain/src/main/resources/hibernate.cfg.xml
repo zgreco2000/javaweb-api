@@ -35,6 +35,9 @@
 			
 			<mapping
 			class="ar.com.educacionit.app.domain.User" />
+			
+			<mapping
+			class="ar.com.educacionit.app.domain.TipoProducto" />
 
 	</session-factory>
 
